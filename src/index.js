@@ -3,12 +3,12 @@
 
 const express = require('express');
 const mongoose = require('mongoose');
+const Product = require('../models/product');
 
 if (process.env.NODE_ENV !== 'production')
     require('dotenv').config();
 
 const port = process.env.PORT || 8001;
-
 const app = express();
 
 // connect to mongodb
@@ -16,10 +16,18 @@ mongoose.connect(process.env.COFFEE_DATA, () => console.log('Connected to mongod
 
 
 // routes
-app.use('/', (req, res, next) => {
+app.use('/',async (req, res, next) =>  { 
+    let productions = await Product.find();
+    const listtype = ['nc','bia','ta','gao'];
+    let data =  listtype.map( type => { 
+        return {
+            "type": type,
+            "data": productions.filter(product => product.type == type)
+        }
+    });
   res.status(res.statusCode || 200);
     res.json({
-        message: "hello world"
+        product : data,
     });
 });
 
