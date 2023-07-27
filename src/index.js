@@ -7,7 +7,7 @@ const Product = require('../models/product');
 
 require('dotenv').config();
 
-const port = process.env.PORT || 15062;
+const port = process.env.PORT || 10000;
 const app = express();
 
 // connect to mongodb
@@ -44,4 +44,4 @@ app.use((err, req, res, next) => {
     });
 });
 
-app.listen(port, () => console.log("Listening on port 15062"));
+app.listen(port, () => console.log("Listening on port 10000"));
