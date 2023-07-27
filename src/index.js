@@ -25,7 +25,7 @@ connDB.once('open', () => {
 // routes
 app.use('/api',async (req, res, next) =>  { 
     let productions = await Product.find();
-    const listtype = ['nc','bia','ta','gao'];
+    const listtype = ['Nước giải khát','Bia','Thức ăn & Lúa','Gạo'];
     let data =  listtype.map( type => { 
         return {
             "type": type,
