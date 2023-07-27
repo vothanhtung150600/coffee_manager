@@ -7,12 +7,13 @@ const Product = require('../models/product');
 
 require('dotenv').config();
 
-const port = process.env.PORT || 8001;
+const port = process.env.PORT || 15062;
 const app = express();
 
 // connect to mongodb
 mongoose.connect(process.env.COFFEE_DATA, () => console.log('Connected to mongodb'))
 
+console.log(process.env.COFFEE_DATA);
 
 // routes
 app.use('/',async (req, res, next) =>  { 
@@ -43,4 +44,4 @@ app.use((err, req, res, next) => {
     });
 });
 
-app.listen(port, () => console.log("Listening on port 8001"));
+app.listen(port, () => console.log("Listening on port 15062"));
