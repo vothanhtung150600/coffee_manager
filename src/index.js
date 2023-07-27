@@ -11,12 +11,19 @@ const port = process.env.PORT || 10000;
 const app = express();
 
 // connect to mongodb
-mongoose.connect(process.env.COFFEE_DATA, () => console.log('Connected to mongodb'))
 
-console.log(process.env.COFFEE_DATA);
+mongoose.connect(process.env.COFFEE_DATA)
+const connDB = mongoose.connection
+connDB.on('error', (error) => {
+    console.log(error)
+})
+
+connDB.once('open', () => {
+    console.log(`MongoDB Connected: ${connDB.host}`)
+})
 
 // routes
-app.use('/',async (req, res, next) =>  { 
+app.use('/api',async (req, res, next) =>  { 
     let productions = await Product.find();
     const listtype = ['nc','bia','ta','gao'];
     let data =  listtype.map( type => { 
