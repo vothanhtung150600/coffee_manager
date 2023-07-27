@@ -5,8 +5,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const Product = require('../models/product');
 
-if (process.env.NODE_ENV !== 'production')
-    require('dotenv').config();
+require('dotenv').config();
 
 const port = process.env.PORT || 8001;
 const app = express();
